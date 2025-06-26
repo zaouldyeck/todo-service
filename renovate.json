@@ -1,0 +1,14 @@
+{
+  "extends": ["config:base"],
+  "packageRules": [
+    {
+      "managers": ["gomod"],
+      "automerge": true
+    },
+    {
+      "matchPaths": ["Dockerfile"],
+      "matchDatasources": ["docker"],
+      "automerge": true
+    }
+  ]
+}
