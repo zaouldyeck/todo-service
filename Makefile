@@ -1,4 +1,11 @@
 # ==============================================
+# Ensure GitHub token is set for Renovate
+ifndef RENOVATE_TOKEN
+$(error RENOVATE_TOKEN is not set. Please export your GitHub Personal Access Token as RENOVATE_TOKEN)
+endif
+export RENOVATE_TOKEN
+
+# ==============================================
 # Deps
 KIND             := kindest/node:v1.33.1
 KIND_CLUSTER     := todo-api-cluster
@@ -168,7 +175,10 @@ renovate-config:
 
 renovate: install-renovate-cli renovate-config
 	@echo ">>> Running Renovate"
-	renovate
+	renovate \
+	  --token "$(RENOVATE_TOKEN)" \
+	  --autodiscover \
+	  --autodiscover-filter="/zaouldyeck/todo-service"
 
 # ==============================================
 # Full bootstrap: from scratch through Renovate
